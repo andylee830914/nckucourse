@@ -17,6 +17,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 	var Depid = ["C1", "A9", "A4", "L1", "F7"]
 	var depobj : NSArray = []
 	var selectdep : Int = 0
+	var selectsn : Int = 0
 	
 	
 	@IBOutlet weak var courseid: UITextField!
@@ -87,9 +88,16 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		if component==0{
 			selectdep=row
 			pickerView.reloadComponent(1)
-		}else{
+			if selectsn > depobj[selectdep]["dep"]!!.count{
+				selectsn=depobj[selectdep]["dep"]!!.count-1
+			}
 			var depid: AnyObject = depobj[selectdep]["dep"]!!
-			dep.text = (depid[row]["id"] as? String)!
+			dep.text = (depid[selectsn]["id"] as? String)!
+
+		}else{
+			selectsn=row
+			var depid: AnyObject = depobj[selectdep]["dep"]!!
+			dep.text = (depid[selectsn]["id"] as? String)!
 		}
 		
 		
