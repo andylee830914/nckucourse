@@ -201,7 +201,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 		let entityDescription = NSEntityDescription.entityForName("Course",inManagedObjectContext: managedObjectContext!)
 		
-		let course = NSManagedObject(entity: entityDescription!,insertIntoManagedObjectContext: managedObjectContext)
+		
 		
 		
 		
@@ -217,7 +217,10 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				for var n = 0; n < fetchedResults.count; n++ {
 					println(fetchedResults[n].valueForKey("cid") as! String)
 				}
+				print(fetchedResults.count)
+				
 				if fetchedResults.count==0 {
+					let course = NSManagedObject(entity: entityDescription!,insertIntoManagedObjectContext: managedObjectContext)
 					course.setValue(respond[0] as! String, forKey: "dep")
 					course.setValue(respond[1] as! String, forKey: "csn")
 					course.setValue(respond[2] as! String, forKey: "cid")
@@ -227,6 +230,11 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					course.setValue(respond[6] as! String, forKey: "teacher")
 					course.setValue(respond[7] as! String, forKey: "time")
 					course.setValue(respond[8] as! String, forKey: "place")
+					
+					var error: NSError?
+					if !managedObjectContext!.save(&error) {
+						println("Could not save \(error), \(error?.userInfo)")
+					}
 					dispatch_async(dispatch_get_main_queue(),{
 						var cour=respond[3] as! String
 						self.finish.text="  新增課程："+cour+" 成功！"
@@ -241,6 +249,8 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					});
 					return (false,respond[3] as! String)
 				}
+				
+				
 				
 			}
 			//print(fetchRequest)
