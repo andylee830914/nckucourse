@@ -23,6 +23,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 
 	@IBOutlet weak var finish: UILabel!
 
+	@IBOutlet weak var loading: UIActivityIndicatorView!
 
 
 	
@@ -37,6 +38,11 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		let jsonData = NSData(contentsOfFile:deppath!)
 		let jsonobj:NSArray = (NSJSONSerialization.JSONObjectWithData(jsonData!, options:NSJSONReadingOptions.MutableContainers , error: nil) as? NSArray)!
 		depobj = jsonobj
+		
+		
+		
+
+
 		//print(jsonobj)
         // Do any additional setup after loading the view.
     }
@@ -91,7 +97,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		if component==0{
 			selectdep=row
 			pickerView.reloadComponent(1)
-			if selectsn > depobj[selectdep]["dep"]!!.count{
+			if selectsn >= depobj[selectdep]["dep"]!!.count{
 				selectsn=depobj[selectdep]["dep"]!!.count-1
 			}
 			var depid: AnyObject = depobj[selectdep]["dep"]!!
@@ -131,8 +137,9 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		var htmldata : String=""
 		var coursesn : String=""
 		var coursedata : String=""
-
+		self.loading.startAnimating()
 		let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) ->Void in
+			
 			print("Success")
 			if (error != nil) {
 				callback("noconnection",[])
@@ -143,12 +150,12 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" style='text-align: center;'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			//print(htmldata)
-			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>\\n<TD></TD>\\n<TD></TD>\\n<TD><ahref(.+?)</a></TD>\\n<TD>(.+?)</TD>\\n<TD></TD>\\n<TD>(.+?)</TD>", options: nil, error: nil)!
+			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>([A-Z][A-Z0-9][0-9][0-9][0-9][0-9][0-9])</TD>", options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			htmldata=htmldata as String
 			if let cowMatch = checkSN.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
-					coursesn = depno+(htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
+					coursesn = (htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
 					print("\(coursesn)")
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
@@ -174,7 +181,8 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			}
 			
 			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[\\s\\S]+)<TD>(.+)</TD>\\n(?:.+)>(.+)</a></TD>(?:[\\s\\S]+)", options: nil, error: nil)!
-			let matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
+			var matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
+			matches = depno+","+courseid+","+coursesn+"," + matches
 			let matchesArr = matches.componentsSeparatedByString(",")
 			callback("Success",matchesArr)
 			return
@@ -186,15 +194,61 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		
 	}
 	func checkhandle(status: String ,respond : NSArray)->(Bool,String){
+		dispatch_async(dispatch_get_main_queue(),{
+			self.loading.stopAnimating()
+		});
+		//FOR ADD DATA
+		let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+		let entityDescription = NSEntityDescription.entityForName("Course",inManagedObjectContext: managedObjectContext!)
+		
+		let course = NSManagedObject(entity: entityDescription!,insertIntoManagedObjectContext: managedObjectContext)
+		
+		
+		
 		if status=="Success" {
+			//FOR SEARCH DATA
+			let fetchRequest = NSFetchRequest(entityName: "Course")
+			let cidsearch = NSPredicate(format: "cid == %@",respond[2] as! String)
+			
+			fetchRequest.predicate=cidsearch
 			print(respond)
+			
+			if let fetchedResults = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [NSManagedObject]?{
+				for var n = 0; n < fetchedResults.count; n++ {
+					println(fetchedResults[n].valueForKey("cid") as! String)
+				}
+				if fetchedResults.count==0 {
+					course.setValue(respond[0] as! String, forKey: "dep")
+					course.setValue(respond[1] as! String, forKey: "csn")
+					course.setValue(respond[2] as! String, forKey: "cid")
+					course.setValue(respond[3] as! String, forKey: "name")
+					course.setValue(respond[4] as! String, forKey: "type")
+					course.setValue(respond[5] as! String, forKey: "credit")
+					course.setValue(respond[6] as! String, forKey: "teacher")
+					course.setValue(respond[7] as! String, forKey: "time")
+					course.setValue(respond[8] as! String, forKey: "place")
+					dispatch_async(dispatch_get_main_queue(),{
+						var cour=respond[3] as! String
+						self.finish.text="  新增課程："+cour+" 成功！"
+						self.finish.textAlignment = NSTextAlignment.Center;
+					});
+					return (true,respond[3] as! String)
+				}else{
+					dispatch_async(dispatch_get_main_queue(),{
+						var cour=respond[3] as! String
+						self.finish.text="  新增課程："+cour+" 已存在！"
+						self.finish.textAlignment = NSTextAlignment.Center;
+					});
+					return (false,respond[3] as! String)
+				}
+				
+			}
+			//print(fetchRequest)
 
-			dispatch_async(dispatch_get_main_queue(),{
-				var cour=respond[0] as! String
-				self.finish.text="  新增課程："+cour+" 成功！"
-				self.finish.textAlignment = NSTextAlignment.Center;
-			});
-			return (true,respond[0] as! String)
+			
+			
+			
+			
 		}else if status=="nocourse"{
 			print(status)
 			dispatch_async(dispatch_get_main_queue(),{
@@ -210,6 +264,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			});
 			return (false,"請檢查網路連線！")
 		}
+		
 		return (false,"")
 	}
 	

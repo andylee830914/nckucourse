@@ -118,7 +118,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IAd-9R-OMz">
-                                <rect key="frame" x="0.0" y="395" width="600" height="156"/>
+                                <rect key="frame" x="0.0" y="395" width="600" height="162"/>
                             </pickerView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZRR-iy-8Aj">
                                 <rect key="frame" x="300" y="174" width="92" height="30"/>
@@ -134,9 +134,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dAR-ER-r13">
+                                <rect key="frame" x="405" y="179" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dAR-ER-r13" firstAttribute="leading" secondItem="ZRR-iy-8Aj" secondAttribute="trailing" constant="13" id="10R-hq-M6c"/>
                             <constraint firstAttribute="centerX" secondItem="N97-S7-hA8" secondAttribute="leading" id="8ky-nh-BhO"/>
                             <constraint firstItem="pBq-AB-RBK" firstAttribute="top" secondItem="ZqC-Xk-0eR" secondAttribute="bottom" constant="28" id="A1I-yh-c5B"/>
                             <constraint firstItem="Ecm-Wr-Tlp" firstAttribute="top" secondItem="IAd-9R-OMz" secondAttribute="bottom" id="BND-mg-f5O"/>
@@ -162,6 +166,7 @@
                         <outlet property="courseid" destination="ZRR-iy-8Aj" id="E6P-Ki-m3A"/>
                         <outlet property="dep" destination="N97-S7-hA8" id="yTB-ZY-5ix"/>
                         <outlet property="finish" destination="o01-C2-SRK" id="Egg-vN-O2f"/>
+                        <outlet property="loading" destination="dAR-ER-r13" id="ff7-c9-LG6"/>
                         <outlet property="pickerView" destination="IAd-9R-OMz" id="Fdj-Nt-oB3"/>
                     </connections>
                 </viewController>
