@@ -6,23 +6,50 @@
     </dependencies>
     <scenes>
         <!--課程表-->
-        <scene sceneID="hNz-n2-bh7">
+        <scene sceneID="FWB-fg-bJa">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="nckucourse" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
+                <tableViewController title="課程表" id="Wa2-Sc-ztw" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="UMQ-3L-v08">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="課程表" image="first" id="acW-dT-cKf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="RLm-BY-0a4">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RLm-BY-0a4" id="hKe-is-cc4">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Wa2-Sc-ztw" id="QcF-82-UHy"/>
+                            <outlet property="delegate" destination="Wa2-Sc-ztw" id="miC-Cy-B7M"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="課程表" id="WXU-rH-WO8"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ak7-5f-0o8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="1572" y="-299"/>
+        </scene>
+        <!--課程表-->
+        <scene sceneID="DGZ-AB-wbW">
+            <objects>
+                <navigationController id="GdR-5n-QnB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="課程表" image="first" id="3kg-G9-7vT"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nuo-FX-6S5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Wa2-Sc-ztw" kind="relationship" relationship="rootViewController" id="32O-lf-O7z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Wt-R8-xKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="745" y="-355"/>
         </scene>
         <!--課程列表-->
         <scene sceneID="wg7-f3-ORb">
@@ -176,13 +203,34 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="GdR-5n-QnB" kind="relationship" relationship="viewControllers" id="r4X-nZ-cpn"/>
                         <segue destination="YW8-IG-8xy" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="QpL-M7-fwU" kind="relationship" relationship="viewControllers" id="JWt-cH-owj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="WK6-0J-hwu">
+            <objects>
+                <viewController id="QpL-M7-fwU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IrZ-oN-Qt1"/>
+                        <viewControllerLayoutGuide type="bottom" id="mZA-Te-Hh9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wLh-cY-WfB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" systemItem="more" id="m1r-uC-CgP"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rje-Ib-YBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6" y="755"/>
         </scene>
         <!--選課表-->
         <scene sceneID="Gvz-nH-Vm9">
