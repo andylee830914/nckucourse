@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 
@@ -18,10 +19,12 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 	var depobj : NSArray = []
 	var selectdep : Int = 0
 	var selectsn : Int = 0
-	
-	
 	@IBOutlet weak var courseid: UITextField!
-	
+
+	@IBOutlet weak var finish: UILabel!
+
+
+
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +37,6 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		let jsonData = NSData(contentsOfFile:deppath!)
 		let jsonobj:NSArray = (NSJSONSerialization.JSONObjectWithData(jsonData!, options:NSJSONReadingOptions.MutableContainers , error: nil) as? NSArray)!
 		depobj = jsonobj
-		
 		//print(jsonobj)
         // Do any additional setup after loading the view.
     }
@@ -85,6 +87,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 	
 	func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
 	{
+		self.finish.text=""
 		if component==0{
 			selectdep=row
 			pickerView.reloadComponent(1)
@@ -108,19 +111,118 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		textField.resignFirstResponder()
 		return true
 	}
-	
-	func findcourse(depno : String)->Bool{
-		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/qry/qry001.php?dept_no="+depno)
+	func findalert(status : Bool, coursename : String){
+		if status {
+		let alertController = UIAlertController(title: "新增成功", message:
+			"新增課程：\(coursename) 成功！", preferredStyle: UIAlertControllerStyle.Alert)
+			alertController.addAction(UIAlertAction(title: "確定", style: UIAlertActionStyle.Default,handler: nil))
+			self.presentViewController(alertController, animated: true, completion: nil)
+		}else{
+			let alertController = UIAlertController(title: "新增失敗", message:
+				"\(coursename)", preferredStyle: UIAlertControllerStyle.Alert)
+			alertController.addAction(UIAlertAction(title: "確定", style: UIAlertActionStyle.Default,handler: nil))
+			self.presentViewController(alertController, animated: true, completion: nil)
+		}
 		
-		let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-			println(NSString(data: data, encoding: NSUTF8StringEncoding))
+	}
+	
+	func findcourse(depno : String,courseid : String,callback: (String, NSArray) -> Void){
+		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/qry/qry001.php?lang=zh_tw&dept_no="+depno)
+		var htmldata : String=""
+		var coursesn : String=""
+		var coursedata : String=""
+
+		let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) ->Void in
+			print("Success")
+			if (error != nil) {
+				callback("noconnection",[])
+				return
+			}
+			htmldata=NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+			//print(matches)
+			htmldata = htmldata.stringByReplacingOccurrencesOfString(" style='text-align: center;'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+			htmldata = htmldata.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+			//print(htmldata)
+			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>\\n<TD></TD>\\n<TD></TD>\\n<TD><ahref(.+?)</a></TD>\\n<TD>(.+?)</TD>\\n<TD></TD>\\n<TD>(.+?)</TD>", options: nil, error: nil)!
+			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
+			htmldata=htmldata as String
+			if let cowMatch = checkSN.firstMatchInString(htmldata, options: nil,
+				range: NSRange(location: 0, length: count(htmldata))){
+					coursesn = depno+(htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
+					print("\(coursesn)")
+					//var match=cowMatch as NSTextCheckingResult
+					// prints "cow"
+			}else{
+				print("nothing\n")
+				callback("nocourse",[])
+				return
+			}
+			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)co_no="+coursesn, options: nil, error: nil)!
+			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
+			if let cowMatch = checkDATA.firstMatchInString(htmldata, options: nil,
+				range: NSRange(location: 0, length: count(htmldata))){
+					coursedata = "cname"+(htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
+					//print("\(coursedata)")
+					//var match=cowMatch as NSTextCheckingResult
+					// prints "cow"
+			}else{
+				//self.findalert(false, coursename: "")
+				print("nothing\n")
+
+				callback("nocourse",[])
+				return
+			}
+			
+			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[\\s\\S]+)<TD>(.+)</TD>\\n(?:.+)>(.+)</a></TD>(?:[\\s\\S]+)", options: nil, error: nil)!
+			let matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
+			let matchesArr = matches.componentsSeparatedByString(",")
+			callback("Success",matchesArr)
+			return
 		}
 		
 		task.resume()
-		return true
+		
+		return
+		
 	}
+	func checkhandle(status: String ,respond : NSArray)->(Bool,String){
+		if status=="Success" {
+			print(respond)
+
+			dispatch_async(dispatch_get_main_queue(),{
+				var cour=respond[0] as! String
+				self.finish.text="  新增課程："+cour+" 成功！"
+				self.finish.textAlignment = NSTextAlignment.Center;
+			});
+			return (true,respond[0] as! String)
+		}else if status=="nocourse"{
+			print(status)
+			dispatch_async(dispatch_get_main_queue(),{
+				self.finish.text="  查無課程！"
+				self.finish.textAlignment = NSTextAlignment.Center;
+			});
+			return (false,"查無課程！")
+		}else if status=="noconnection"{
+			print(status)
+			dispatch_async(dispatch_get_main_queue(),{
+				self.finish.text="  請檢查網路連線！"
+				self.finish.textAlignment = NSTextAlignment.Center;
+			});
+			return (false,"請檢查網路連線！")
+		}
+		return (false,"")
+	}
+	
 	@IBAction func addCourse(sender: AnyObject) {
-		findcourse( dep.text)
+		findcourse( dep.text,courseid: courseid.text){
+			(status, data) -> Void in
+			print(self.checkhandle(status, respond: data))
+			
+			
+		}
+		//print(course)
+		//findalert(status,coursename: course[0] as! String)
+
 	}
 
 	
