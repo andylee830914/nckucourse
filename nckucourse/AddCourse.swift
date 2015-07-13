@@ -134,9 +134,11 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 	
 	func findcourse(depno : String,courseid : String,callback: (String, NSArray) -> Void){
 		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/qry/qry001.php?lang=zh_tw&dept_no="+depno)
-		var htmldata : String=""
-		var coursesn : String=""
-		var coursedata : String=""
+		var htmldata : String = ""
+		var coursesn : String = ""
+		var chinese : String = ""
+		var coursedata : String = ""
+		var cclass : String = ""
 		self.loading.startAnimating()
 		let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) ->Void in
 			
@@ -150,9 +152,23 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" style='text-align: center;'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			//print(htmldata)
+			var getChinesename = NSRegularExpression(pattern: "<TD>(.+?)</TD>\\n<TD>"+depno+"</TD>", options: nil, error: nil)!
 			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>([A-Z][A-Z0-9][0-9][0-9][0-9][0-9][0-9])</TD>", options: nil, error: nil)!
+			
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			htmldata=htmldata as String
+			if let cowMatch = getChinesename.firstMatchInString(htmldata, options: nil,
+				range: NSRange(location: 0, length: count(htmldata))){
+					chinese = (htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
+					print("\(chinese)")
+					//var match=cowMatch as NSTextCheckingResult
+					// prints "cow"
+			}else{
+				print("nothing\n")
+				callback("nocourse",[])
+				return
+			}
+			
 			if let cowMatch = checkSN.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
 					coursesn = (htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
@@ -163,6 +179,14 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				print("nothing\n")
 				callback("nocourse",[])
 				return
+			}
+			var getcclass = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>"+coursesn+"</TD>\\n<TD>([A-Z0-9]{0,2})</TD>", options: nil, error: nil)!
+			if let cowMatch = getcclass.firstMatchInString(htmldata, options: nil,
+				range: NSRange(location: 0, length: count(htmldata))){
+					cclass = (htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
+					print("class:\(cclass)\n")
+					//var match=cowMatch as NSTextCheckingResult
+					// prints "cow"
 			}
 			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)co_no="+coursesn, options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
@@ -182,7 +206,8 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			
 			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[\\s\\S]+)<TD>(.+)</TD>\\n(?:.+)>(.+)</a></TD>(?:[\\s\\S]+)", options: nil, error: nil)!
 			var matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
-			matches = depno+","+courseid+","+coursesn+"," + matches
+			matches = depno+","+chinese+","+courseid+","+coursesn+"," + matches
+			matches = matches+","+cclass
 			let matchesArr = matches.componentsSeparatedByString(",")
 			callback("Success",matchesArr)
 			return
@@ -208,7 +233,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		if status=="Success" {
 			//FOR SEARCH DATA
 			let fetchRequest = NSFetchRequest(entityName: "Course")
-			let cidsearch = NSPredicate(format: "cid == %@",respond[2] as! String)
+			let cidsearch = NSPredicate(format: "cid == %@",respond[3] as! String)
 			
 			fetchRequest.predicate=cidsearch
 			print(respond)
@@ -222,32 +247,34 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				if fetchedResults.count==0 {
 					let course = NSManagedObject(entity: entityDescription!,insertIntoManagedObjectContext: managedObjectContext)
 					course.setValue(respond[0] as! String, forKey: "dep")
-					course.setValue(respond[1] as! String, forKey: "csn")
-					course.setValue(respond[2] as! String, forKey: "cid")
-					course.setValue(respond[3] as! String, forKey: "name")
-					course.setValue(respond[4] as! String, forKey: "type")
-					course.setValue(respond[5] as! String, forKey: "credit")
-					course.setValue(respond[6] as! String, forKey: "teacher")
-					course.setValue(respond[7] as! String, forKey: "time")
-					course.setValue(respond[8] as! String, forKey: "place")
+					course.setValue(respond[1] as! String, forKey: "depname")
+					course.setValue(respond[2] as! String, forKey: "csn")
+					course.setValue(respond[3] as! String, forKey: "cid")
+					course.setValue(respond[4] as! String, forKey: "name")
+					course.setValue(respond[5] as! String, forKey: "type")
+					course.setValue(respond[6] as! String, forKey: "credit")
+					course.setValue(respond[7] as! String, forKey: "teacher")
+					course.setValue(respond[8] as! String, forKey: "time")
+					course.setValue(respond[9] as! String, forKey: "place")
+					course.setValue(respond[10] as! String, forKey: "cclass")
 					
 					var error: NSError?
 					if !managedObjectContext!.save(&error) {
 						println("Could not save \(error), \(error?.userInfo)")
 					}
 					dispatch_async(dispatch_get_main_queue(),{
-						var cour=respond[3] as! String
+						var cour=respond[4] as! String
 						self.finish.text="  新增課程："+cour+" 成功！"
 						self.finish.textAlignment = NSTextAlignment.Center;
 					});
-					return (true,respond[3] as! String)
+					return (true,respond[4] as! String)
 				}else{
 					dispatch_async(dispatch_get_main_queue(),{
-						var cour=respond[3] as! String
+						var cour=respond[4] as! String
 						self.finish.text="  新增課程："+cour+" 已存在！"
 						self.finish.textAlignment = NSTextAlignment.Center;
 					});
-					return (false,respond[3] as! String)
+					return (false,respond[4] as! String)
 				}
 				
 				

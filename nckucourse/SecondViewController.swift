@@ -15,7 +15,6 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 	let managedObjectContext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
 	
 	var fetchedResultsController: NSFetchedResultsController = NSFetchedResultsController()
-	var ListArray: NSArray = ["Hello world", "Swift", "UITableView", "媽!我在這裡"]
 
 	@IBOutlet weak var courselist: UITableView!
 	override func viewDidLoad() {
@@ -61,33 +60,35 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 	}
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
-		let data: AnyObject = fetchedResultsController.objectAtIndexPath(indexPath)
+		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
 		print(data)
 		cell.textLabel?.text=data.name
 		
 		return cell
 	}
-
-	/*
-	func tableView(tableView: UITableView!, numberOfRowsInSection section:Int) -> Int {
-
-		return ListArray.count
-
+	func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return true
 	}
-
 	
-
-	//填充UITableViewCell中文字標簽的值
-
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-		let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
-
-		cell.textLabel!.text = "\(ListArray.objectAtIndex(indexPath.row))"
-		return cell
+	func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		if editingStyle == UITableViewCellEditingStyle.Delete {
+				print("delete")
+		}
 	}
-*/
-
+	
+	let SegueID = "ShowDetail"
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == SegueID {
+			//get destination controller
+			var destViewController = segue.destinationViewController as! ShowCourseDetail;
+			let indexPath = self.courselist?.indexPathForCell(sender as! UITableViewCell)
+			let data = fetchedResultsController.objectAtIndexPath(indexPath!) as! Course
+			destViewController.receiveData = "SegueData!!!!!";
+			destViewController.data=data
+		}
+		
+	}
 
 }
 
