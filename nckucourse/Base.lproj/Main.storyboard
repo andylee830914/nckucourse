@@ -31,7 +31,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9bt-2Q-yHO">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -41,6 +41,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="800" height="626"/>
+                                </variation>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -232,7 +235,7 @@
         <!--課程表-->
         <scene sceneID="YEe-d4-uFa">
             <objects>
-                <viewController id="Ivp-Hd-4A4" customClass="FirstViewController" customModule="nckucourse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ivp-Hd-4A4" customClass="FirstViewController" customModule="nckucourse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Odo-Ra-utC"/>
                         <viewControllerLayoutGuide type="bottom" id="CWw-b0-RGe"/>
@@ -241,50 +244,114 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="bottomLeft" ambiguous="YES" directionalLockEnabled="YES" bounces="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cv8-SD-wSE">
-                                <rect key="frame" x="0.0" y="64" width="600" height="50"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="teS-Em-Sz8">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="600" id="NhT-RA-m2Q"/>
-                                            <constraint firstAttribute="height" constant="50" id="Tow-bN-fUV"/>
-                                        </constraints>
-                                        <variation key="widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="800" height="50"/>
-                                        </variation>
-                                        <connections>
-                                            <segue destination="xLP-2j-Gbt" kind="embed" id="Zij-uN-URq"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.0"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="4B0-Kr-eqD"/>
-                                    <constraint firstItem="teS-Em-Sz8" firstAttribute="leading" secondItem="cv8-SD-wSE" secondAttribute="leading" id="BOQ-5b-NrB"/>
-                                    <constraint firstItem="teS-Em-Sz8" firstAttribute="top" secondItem="cv8-SD-wSE" secondAttribute="top" id="CMQ-W3-2DS"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="teS-Em-Sz8" secondAttribute="trailingMargin" id="a5Q-WS-whm"/>
-                                </constraints>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="64" width="800" height="50"/>
-                                </variation>
-                            </scrollView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ef6-Zx-y4s">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <connections>
+                                    <segue destination="yPC-wd-LnN" kind="embed" identifier="Daily" id="Mhw-KZ-7i1"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3W-EI-9rd">
+                                <rect key="frame" x="285" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="四">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="thursday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="bho-bA-fdq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI5-Dq-5zy">
+                                <rect key="frame" x="242" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="三">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="wednesday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="mXV-CT-42P"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJa-Q1-QRG">
+                                <rect key="frame" x="199" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="二">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tuesday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="J44-7B-hPD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fim-gO-0Qc">
+                                <rect key="frame" x="371" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="六">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saturday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="7RA-y6-nkq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2d-0R-Rpa">
+                                <rect key="frame" x="414" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="日">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sunday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="yqk-b9-eXo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sQ-z9-uj9">
+                                <rect key="frame" x="328" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="五">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="friday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="xgY-IV-UDc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qp-93-4sF">
+                                <rect key="frame" x="156" y="79" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="一">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="monday:" destination="Ivp-Hd-4A4" eventType="touchUpInside" id="exg-yJ-NL9"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cv8-SD-wSE" firstAttribute="leading" secondItem="zZV-D6-fqc" secondAttribute="leadingMargin" constant="-16" id="K1P-x1-tEh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cv8-SD-wSE" secondAttribute="trailing" constant="-16" id="Ora-TW-pyb"/>
-                            <constraint firstItem="cv8-SD-wSE" firstAttribute="top" secondItem="Odo-Ra-utC" secondAttribute="bottom" id="g2U-Da-r6X"/>
+                            <constraint firstItem="ef6-Zx-y4s" firstAttribute="leading" secondItem="zZV-D6-fqc" secondAttribute="leadingMargin" constant="-16" id="40J-Xo-jAF"/>
+                            <constraint firstItem="wJa-Q1-QRG" firstAttribute="leading" secondItem="7qp-93-4sF" secondAttribute="trailing" constant="13" id="4LV-hF-Te5"/>
+                            <constraint firstItem="6sQ-z9-uj9" firstAttribute="leading" secondItem="L3W-EI-9rd" secondAttribute="trailing" constant="13" id="8fZ-pa-bOQ"/>
+                            <constraint firstItem="Fim-gO-0Qc" firstAttribute="leading" secondItem="6sQ-z9-uj9" secondAttribute="trailing" constant="13" id="9o5-ha-IAJ"/>
+                            <constraint firstItem="ef6-Zx-y4s" firstAttribute="top" secondItem="Odo-Ra-utC" secondAttribute="bottom" constant="60" id="EKI-6X-qfl"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="wJa-Q1-QRG" secondAttribute="baseline" id="Eq5-rb-ESA"/>
+                            <constraint firstItem="uI5-Dq-5zy" firstAttribute="leading" secondItem="wJa-Q1-QRG" secondAttribute="trailing" constant="13" id="Lqy-Uo-0zu"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="g2d-0R-Rpa" secondAttribute="baseline" id="M5q-K9-gGX"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="uI5-Dq-5zy" secondAttribute="baseline" id="QLn-uD-jas"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="7qp-93-4sF" secondAttribute="baseline" id="RQ3-H4-awK"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="6sQ-z9-uj9" secondAttribute="baseline" id="UJd-Es-9Mv"/>
+                            <constraint firstItem="ef6-Zx-y4s" firstAttribute="bottom" secondItem="zZV-D6-fqc" secondAttribute="bottomMargin" id="VAd-98-CBT"/>
+                            <constraint firstItem="ef6-Zx-y4s" firstAttribute="top" secondItem="L3W-EI-9rd" secondAttribute="bottom" constant="15" id="VIb-4F-KYJ"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="leading" secondItem="uI5-Dq-5zy" secondAttribute="trailing" constant="13" id="ZhQ-FS-R8O"/>
+                            <constraint firstItem="g2d-0R-Rpa" firstAttribute="leading" secondItem="Fim-gO-0Qc" secondAttribute="trailing" constant="13" id="gfv-xe-YEJ"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="baseline" secondItem="Fim-gO-0Qc" secondAttribute="baseline" id="lgI-4h-6F0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ef6-Zx-y4s" secondAttribute="trailing" constant="-16" id="oVv-O6-aW4"/>
+                            <constraint firstAttribute="centerX" secondItem="L3W-EI-9rd" secondAttribute="centerX" id="vW4-MU-jcm"/>
+                            <constraint firstItem="L3W-EI-9rd" firstAttribute="top" secondItem="Odo-Ra-utC" secondAttribute="bottom" constant="15" id="xDv-uC-EBq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="課程表" id="juT-3l-tOd"/>
                     <connections>
-                        <outlet property="scrollview" destination="cv8-SD-wSE" id="A6H-Bd-aC6"/>
+                        <outlet property="schedule" destination="ef6-Zx-y4s" id="1qu-iW-F33"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWw-oX-RKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545.75" y="-291"/>
+            <point key="canvasLocation" x="1544" y="-272"/>
         </scene>
         <!--選課表-->
         <scene sceneID="Gvz-nH-Vm9">
@@ -305,11 +372,11 @@
             </objects>
             <point key="canvasLocation" x="1026" y="411"/>
         </scene>
-        <!--Item-->
+        <!--課程表-->
         <scene sceneID="Wyf-X2-b6f">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gY3-wJ-bPA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="first" id="RSl-zd-EG3"/>
+                    <tabBarItem key="tabBarItem" title="課程表" image="first" id="RSl-zd-EG3"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YLd-Ie-4Q6">
@@ -344,90 +411,34 @@
             </objects>
             <point key="canvasLocation" x="6" y="755"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="q9n-5a-ymi">
+        <!--Daily Course-->
+        <scene sceneID="cEm-Mz-lvw">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xLP-2j-Gbt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="CZQ-EM-Sxr"/>
-                        <viewControllerLayoutGuide type="bottom" id="DVD-Lc-GZe"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CxN-O8-uYg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                <tableViewController id="yPC-wd-LnN" customClass="dailyCourse" customModule="nckucourse" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="dPf-d9-YnO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SoB-Ez-ztU">
-                                <rect key="frame" x="186" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期三">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXG-9m-AgE">
-                                <rect key="frame" x="354" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期五">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5L-Xh-TBw">
-                                <rect key="frame" x="438" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期六">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhQ-Eo-VKP">
-                                <rect key="frame" x="522" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期日">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M70-T4-Mdn">
-                                <rect key="frame" x="102" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期二">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xah-10-Rbh">
-                                <rect key="frame" x="18" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期一">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xi2-LJ-SSd">
-                                <rect key="frame" x="270" y="10" width="60" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="星期四">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93574416035353536" green="0.93574416035353536" blue="0.93574416035353536" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="Xi2-LJ-SSd" secondAttribute="top" id="GUk-b3-LAW"/>
-                            <constraint firstAttribute="centerY" secondItem="SoB-Ez-ztU" secondAttribute="centerY" id="N5s-Xz-bYp"/>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="SoB-Ez-ztU" secondAttribute="top" id="PPY-mX-Usd"/>
-                            <constraint firstAttribute="centerY" secondItem="Xi2-LJ-SSd" secondAttribute="centerY" id="Tui-95-m83"/>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="M70-T4-Mdn" secondAttribute="top" id="UOB-Zl-wgq"/>
-                            <constraint firstAttribute="centerY" secondItem="xah-10-Rbh" secondAttribute="centerY" id="W6K-T7-2d3"/>
-                            <constraint firstAttribute="centerY" secondItem="pXG-9m-AgE" secondAttribute="centerY" id="Yqh-oV-Fu1"/>
-                            <constraint firstAttribute="centerY" secondItem="R5L-Xh-TBw" secondAttribute="centerY" id="eBb-ye-Pz1"/>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="R5L-Xh-TBw" secondAttribute="top" id="gVb-h5-xOP"/>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="xah-10-Rbh" secondAttribute="top" id="hRI-Pa-4e0"/>
-                            <constraint firstAttribute="centerY" secondItem="FhQ-Eo-VKP" secondAttribute="centerY" id="i82-ay-FFr"/>
-                            <constraint firstItem="pXG-9m-AgE" firstAttribute="top" secondItem="FhQ-Eo-VKP" secondAttribute="top" id="jD4-gC-AUl"/>
-                            <constraint firstAttribute="centerY" secondItem="M70-T4-Mdn" secondAttribute="centerY" id="zFV-Op-yOx"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j26-SY-1qE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Daily" id="uHm-rG-WiF">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uHm-rG-WiF" id="joc-J7-kOp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="yPC-wd-LnN" id="bbT-xY-HZl"/>
+                            <outlet property="delegate" destination="yPC-wd-LnN" id="NS2-Nx-tF4"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="dailylist" destination="dPf-d9-YnO" id="ADb-CK-0j4"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nrg-IX-hdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2521" y="-540.5"/>
+            <point key="canvasLocation" x="2273" y="-608"/>
         </scene>
     </scenes>
     <resources>

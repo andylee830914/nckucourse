@@ -9,14 +9,12 @@
 import UIKit
 
 class ShowCourseDetail: UIViewController {
-	var receiveData: String!
 	var data: Course!
 	@IBOutlet weak var webview: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.title = data.name
-		println(receiveData)
-		print(data)
+		//print(data)
 		var courseid = data.cid
 		var cclass = data.cclass
 		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/syllabus/online_display.php?syear=0104&sem=1&co_no="+courseid+"&class_code="+cclass)

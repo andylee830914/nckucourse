@@ -35,7 +35,6 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 		// Dispose of any resources that can be recreated.
 	}
 	override func viewWillAppear(animated: Bool) {
-		print("hello")
 		var error:NSError? = nil
 		let fetchRequest = NSFetchRequest(entityName: "Course")
 		let sortDescriptor = NSSortDescriptor(key: "cid", ascending: true)
@@ -46,19 +45,17 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 		
 	}
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		print("numberOfSections:")
-		//print(fetchedResultsController.sections!.count)
+		print(fetchedResultsController.sections!.count)
 		print("\n")
 		return fetchedResultsController.sections!.count
 	}
 	func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
 		let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
-		print("numberOfObjects")
-		//print(sectionInfo.numberOfObjects)
-		print("\n")
+		
 		return sectionInfo.numberOfObjects
 	}
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		print("hello2")
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
 		print(data)
@@ -84,7 +81,6 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 			var destViewController = segue.destinationViewController as! ShowCourseDetail;
 			let indexPath = self.courselist?.indexPathForCell(sender as! UITableViewCell)
 			let data = fetchedResultsController.objectAtIndexPath(indexPath!) as! Course
-			destViewController.receiveData = "SegueData!!!!!";
 			destViewController.data=data
 		}
 		
