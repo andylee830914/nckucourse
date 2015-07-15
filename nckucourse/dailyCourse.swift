@@ -31,11 +31,11 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 		let vc = self.parentViewController
 		
 		weekday=vc?.valueForKey("nowweek") as? Int
-		print("MY:\(weekday)")
+		//print("MY:\(weekday)")
 		if weekday != nil{
 			nowweekday = weekday!
 		}
-		print(nowweekday)
+		//print(nowweekday)
 		var error:NSError? = nil
 		let fetchRequest = NSFetchRequest(entityName: "Course")
 		let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
@@ -69,8 +69,24 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 		let cell = tableView.dequeueReusableCellWithIdentifier("Daily", forIndexPath: indexPath) as! UITableViewCell
 		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
 		//print(data)
+		var day="\(self.nowweekday)"
+		//print(data.time)
 		
-		cell.textLabel?.text=data.time+data.name
+		var gettimeori = NSRegularExpression(pattern: "<BR>\\["+day+"\\]([A-Z0-9])(?:~{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
+		let cowMatch = gettimeori.firstMatchInString(data.time, options: nil,
+			range: NSRange(location: 0, length: count(data.time)))
+		var newtime = (data.time as NSString).substringWithRange(cowMatch!.rangeAtIndex(0))
+				//print("here:\(newtime)\n")
+				//var match=cowMatch as NSTextCheckingResult
+				// prints "cow"
+		
+		var gettime = NSRegularExpression(pattern: "<BR>\\["+day+"\\]([A-Z0-9])(?:.{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
+		//print(gettime)
+		var matches = gettime.stringByReplacingMatchesInString(newtime, options: nil, range: NSRange(location: 0, length: count(newtime)), withTemplate: "$1,$2")
+		//print(matches)
+		newtime=newtime.stringByReplacingOccurrencesOfString("<BR>", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+		cell.textLabel?.text=newtime+" "+data.name
+		cell.detailTextLabel!.text = data.place
 		
 		return cell
 	}

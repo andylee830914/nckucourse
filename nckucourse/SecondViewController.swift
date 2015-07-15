@@ -45,8 +45,8 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 		
 	}
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		print(fetchedResultsController.sections!.count)
-		print("\n")
+		//print(fetchedResultsController.sections!.count)
+		//print("\n")
 		return fetchedResultsController.sections!.count
 	}
 	func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
@@ -55,10 +55,10 @@ class SecondViewController: UIViewController,NSFetchedResultsControllerDelegate,
 		return sectionInfo.numberOfObjects
 	}
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		print("hello2")
+		//print("hello2")
 		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
 		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
-		print(data)
+		//print(data)
 		cell.textLabel?.text=data.name
 		
 		return cell
