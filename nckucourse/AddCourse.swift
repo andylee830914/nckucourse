@@ -188,12 +188,12 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
 			}
-			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)co_no="+coursesn, options: nil, error: nil)!
+			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)co_no="+coursesn+"", options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			if let cowMatch = checkDATA.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
 					coursedata = "cname"+(htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
-					//print("\(coursedata)")
+					print("\(coursedata)")
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
 			}else{
@@ -204,7 +204,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				return
 			}
 			
-			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[\\s\\S]+)<TD>(.+)</TD>\\n(?:.+)>(.+)</a></TD>(?:[\\s\\S]+)", options: nil, error: nil)!
+			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(.+)</TD>\\n<TD>(?:.+)>(.+)</a></TD>\\n(?:[\\s\\S]+)", options: nil, error: nil)!
 			var matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
 			matches = depno+","+chinese+","+courseid+","+coursesn+"," + matches
 			matches = matches+","+cclass
