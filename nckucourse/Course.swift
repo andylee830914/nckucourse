@@ -23,5 +23,6 @@ class Course: NSManagedObject {
     @NSManaged var teacher: String
     @NSManaged var time: String
     @NSManaged var type: String
-
+	@NSManaged var syear: String
+	@NSManaged var sem: String
 }

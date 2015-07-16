@@ -188,7 +188,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
 			}
-			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)co_no="+coursesn+"", options: nil, error: nil)!
+			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)="+coursesn+"", options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			if let cowMatch = checkDATA.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
@@ -204,11 +204,12 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				return
 			}
 			
-			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(.+)</TD>\\n<TD>(?:.+)>(.+)</a></TD>\\n(?:[\\s\\S]+)", options: nil, error: nil)!
-			var matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6")
+			var parseDATA = NSRegularExpression(pattern: "cname(.+)</a></TD>\\n<TD>(.+)</TD>\\n<TD>([0-9])</TD><TD>(.+)</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(?:[0-9]{1,3})</TD>\\n<TD>(.+)</TD>\\n<TD><aclass='room'(?:.+)>(.*)</a></TD>\\n<TD><atarget=\"moodle\"href=\"moodle.php\\?syear=(.+)&sem=(.+)&co_no(?:[\\s\\S]*)", options: nil, error: nil)!
+			var matches = parseDATA.stringByReplacingMatchesInString(coursedata, options: nil, range: NSRange(location: 0, length: count(coursedata)), withTemplate: "$1,$2,$3,$4,$5,$6,$7,$8")
 			matches = depno+","+chinese+","+courseid+","+coursesn+"," + matches
 			matches = matches+","+cclass
 			let matchesArr = matches.componentsSeparatedByString(",")
+			//print(matches)
 			callback("Success",matchesArr)
 			return
 		}
@@ -256,7 +257,9 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					course.setValue(respond[7] as! String, forKey: "teacher")
 					course.setValue(respond[8] as! String, forKey: "time")
 					course.setValue(respond[9] as! String, forKey: "place")
-					course.setValue(respond[10] as! String, forKey: "cclass")
+					course.setValue(respond[10] as! String, forKey: "syear")
+					course.setValue(respond[11] as! String, forKey: "sem")
+					course.setValue(respond[12] as! String, forKey: "cclass")
 					
 					var error: NSError?
 					if !managedObjectContext!.save(&error) {

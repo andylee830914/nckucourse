@@ -9,11 +9,13 @@
         <attribute name="depname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="place" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="syear" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teacher" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="Course" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

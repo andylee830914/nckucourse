@@ -15,9 +15,11 @@ class ShowCourseDetail: UIViewController {
         super.viewDidLoad()
 		self.title = data.name
 		//print(data)
+		var syear = data.syear
+		var sem = data.sem
 		var courseid = data.cid
 		var cclass = data.cclass
-		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/syllabus/online_display.php?syear=0104&sem=1&co_no="+courseid+"&class_code="+cclass)
+		let url = NSURL(string: "http://class-qry.acad.ncku.edu.tw/syllabus/online_display.php?syear="+syear+"&sem="+sem+"&co_no="+courseid+"&class_code="+cclass)
 		let requestObj = NSURLRequest(URL: url!)
 		webview.loadRequest(requestObj)
         // Do any additional setup after loading the view.
