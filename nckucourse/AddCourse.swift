@@ -219,6 +219,24 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		return
 		
 	}
+	func checkweekday(weekday:String,timedata:String)->NSNumber{
+		var output : NSNumber = 0
+		var gettimeori = NSRegularExpression(pattern: "<BR>\\["+weekday+"\\]([A-Z0-9])(?:~{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
+		if let cowMatch = gettimeori.firstMatchInString(timedata, options: nil,
+			range: NSRange(location: 0, length: count(timedata))){
+		var newtime = (timedata as NSString).substringWithRange(cowMatch.rangeAtIndex(0))
+		var gettime = NSRegularExpression(pattern: "<BR>\\["+weekday+"\\]([A-Z0-9])(?:.{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
+		//print(gettime)
+		var matches = gettime.stringByReplacingMatchesInString(newtime, options: nil, range: NSRange(location: 0, length: count(newtime)), withTemplate: "$1,$2")
+		let matchesArr = matches.componentsSeparatedByString(",")
+		let temp = matchesArr[0]
+		
+		let nckutimedict = ["1":1,"2":2,"3":3,"4":4,"N":5,"5":6,"6":7,"7":8,"8":9,"9":10,"A":11,"B":12,"C":13]
+			output = nckutimedict[temp]!
+		}
+		return output
+		
+	}
 	func checkhandle(status: String ,respond : NSArray)->(Bool,String){
 		dispatch_async(dispatch_get_main_queue(),{
 			self.loading.stopAnimating()
@@ -260,6 +278,13 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					course.setValue(respond[10] as! String, forKey: "syear")
 					course.setValue(respond[11] as! String, forKey: "sem")
 					course.setValue(respond[12] as! String, forKey: "cclass")
+					course.setValue(checkweekday("1", timedata: respond[8] as! String), forKey: "d1")
+					course.setValue(checkweekday("2", timedata: respond[8] as! String), forKey: "d2")
+					course.setValue(checkweekday("3", timedata: respond[8] as! String), forKey: "d3")
+					course.setValue(checkweekday("4", timedata: respond[8] as! String), forKey: "d4")
+					course.setValue(checkweekday("5", timedata: respond[8] as! String), forKey: "d5")
+					course.setValue(checkweekday("6", timedata: respond[8] as! String), forKey: "d6")
+					course.setValue(checkweekday("7", timedata: respond[8] as! String), forKey: "d7")
 					
 					var error: NSError?
 					if !managedObjectContext!.save(&error) {

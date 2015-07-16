@@ -38,7 +38,7 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 		//print(nowweekday)
 		var error:NSError? = nil
 		let fetchRequest = NSFetchRequest(entityName: "Course")
-		let sortDescriptor = NSSortDescriptor(key: "time", ascending: true)
+		let sortDescriptor = NSSortDescriptor(key: "d\(nowweekday)", ascending: true)
 		let cidsearch = NSPredicate(format: "time CONTAINS %@","[\(nowweekday)]")
 		fetchRequest.sortDescriptors = [sortDescriptor]
 		fetchRequest.predicate=cidsearch
@@ -65,7 +65,8 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		//print("hello2")
+		var mynewtime : String = ""
+		//print("\nhello \(indexPath)\n")
 		let cell = tableView.dequeueReusableCellWithIdentifier("Daily", forIndexPath: indexPath) as! UITableViewCell
 		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
 		//print(data)
@@ -73,20 +74,37 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 		//print(data.time)
 		
 		var gettimeori = NSRegularExpression(pattern: "<BR>\\["+day+"\\]([A-Z0-9])(?:~{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
-		let cowMatch = gettimeori.firstMatchInString(data.time, options: nil,
+		let cowMatch = gettimeori.matchesInString(data.time, options: nil,
 			range: NSRange(location: 0, length: count(data.time)))
-		var newtime = (data.time as NSString).substringWithRange(cowMatch!.rangeAtIndex(0))
+		var total = cowMatch.count
+		var counter = total
+		for match in cowMatch {
+			
+			var newtime = (data.time as NSString).substringWithRange(match.rangeAtIndex(0))
+			newtime=newtime.stringByReplacingOccurrencesOfString("<BR>", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+			if total > 1 {
+				print(counter)
+				if counter > 1{
+					mynewtime = mynewtime+newtime+"\n"
+				}else{
+					mynewtime = mynewtime+newtime
+				}
+			}else{
+				mynewtime = newtime
+			}
+			counter -= counter
+		}
 				//print("here:\(newtime)\n")
 				//var match=cowMatch as NSTextCheckingResult
 				// prints "cow"
 		
-		var gettime = NSRegularExpression(pattern: "<BR>\\["+day+"\\]([A-Z0-9])(?:.{0,1})([A-Z0-9]{0,1})", options: nil, error: nil)!
-		//print(gettime)
-		var matches = gettime.stringByReplacingMatchesInString(newtime, options: nil, range: NSRange(location: 0, length: count(newtime)), withTemplate: "$1,$2")
+		
 		//print(matches)
-		newtime=newtime.stringByReplacingOccurrencesOfString("<BR>", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-		cell.textLabel?.text=newtime+" "+data.name
-		cell.detailTextLabel!.text = data.place
+		(cell.contentView.viewWithTag(1) as! UILabel).text = data.name
+		(cell.contentView.viewWithTag(2) as! UILabel).text = mynewtime
+		(cell.contentView.viewWithTag(3) as! UILabel).text = " "+data.place
+		//cell.textLabel?.text=mynewtime+" "+data.name
+		//cell.detailTextLabel!.text = " "+data.place
 		
 		return cell
 	}

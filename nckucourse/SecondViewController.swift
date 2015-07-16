@@ -41,6 +41,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 		// Dispose of any resources that can be recreated.
 	}
 	override func viewWillAppear(animated: Bool) {
+		tableView.reloadData()
 		
 	}
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -139,6 +140,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 			let indexPath = self.tableView?.indexPathForCell(sender as! UITableViewCell)
 			let data = fetchedResultsController.objectAtIndexPath(indexPath!) as! Course
 			destViewController.data=data
+			destViewController.page="syllabus"
 		}
 		
 	}

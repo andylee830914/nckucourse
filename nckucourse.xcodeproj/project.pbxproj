@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA5679A81B57F37300BD5F16 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5679A71B57F37300BD5F16 /* Course.swift */; };
 		BA5ED53C1B523F5E0081F53C /* nckucourse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA5ED53A1B523F5E0081F53C /* nckucourse.xcdatamodeld */; };
+		BA7FCB6D1B580AC0000285BA /* readmore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7FCB6C1B580AC0000285BA /* readmore.swift */; };
 		BA859C351B54111800C84F06 /* ShowCourseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA859C341B54111800C84F06 /* ShowCourseDetail.swift */; };
 		BAD479BC1B555AF8004EBC48 /* dailyCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD479BB1B555AF8004EBC48 /* dailyCourse.swift */; };
 		BAD6B2111B4EEA47000D1D0D /* AddCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD6B2101B4EEA47000D1D0D /* AddCourse.swift */; };
 		BAD6B2131B501266000D1D0D /* dep.json in Resources */ = {isa = PBXBuildFile; fileRef = BAD6B2121B501266000D1D0D /* dep.json */; };
-		BADEDE221B54380600248BB5 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADEDE211B54380600248BB5 /* Course.swift */; };
 		BAF8D3E81B4ED3C0009F912F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D3E71B4ED3C0009F912F /* AppDelegate.swift */; };
 		BAF8D3EA1B4ED3C0009F912F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D3E91B4ED3C0009F912F /* FirstViewController.swift */; };
 		BAF8D3EC1B4ED3C0009F912F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8D3EB1B4ED3C0009F912F /* SecondViewController.swift */; };
@@ -33,12 +34,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA5679A71B57F37300BD5F16 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		BA5ED53B1B523F5E0081F53C /* nckucourse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = nckucourse.xcdatamodel; sourceTree = "<group>"; };
+		BA7FCB6C1B580AC0000285BA /* readmore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = readmore.swift; sourceTree = "<group>"; };
 		BA859C341B54111800C84F06 /* ShowCourseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCourseDetail.swift; sourceTree = "<group>"; };
 		BAD479BB1B555AF8004EBC48 /* dailyCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dailyCourse.swift; sourceTree = "<group>"; };
 		BAD6B2101B4EEA47000D1D0D /* AddCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourse.swift; sourceTree = "<group>"; };
 		BAD6B2121B501266000D1D0D /* dep.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dep.json; sourceTree = "<group>"; };
-		BADEDE211B54380600248BB5 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		BAF8D3E21B4ED3C0009F912F /* nckucourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nckucourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF8D3E61B4ED3C0009F912F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAF8D3E71B4ED3C0009F912F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +93,8 @@
 		BAF8D3E41B4ED3C0009F912F /* nckucourse */ = {
 			isa = PBXGroup;
 			children = (
-				BADEDE211B54380600248BB5 /* Course.swift */,
+				BA7FCB6C1B580AC0000285BA /* readmore.swift */,
+				BA5679A71B57F37300BD5F16 /* Course.swift */,
 				BAD479BB1B555AF8004EBC48 /* dailyCourse.swift */,
 				BA859C341B54111800C84F06 /* ShowCourseDetail.swift */,
 				BAF8D3E71B4ED3C0009F912F /* AppDelegate.swift */,
@@ -235,10 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5679A81B57F37300BD5F16 /* Course.swift in Sources */,
 				BAD479BC1B555AF8004EBC48 /* dailyCourse.swift in Sources */,
 				BAD6B2111B4EEA47000D1D0D /* AddCourse.swift in Sources */,
-				BADEDE221B54380600248BB5 /* Course.swift in Sources */,
 				BAF8D3EC1B4ED3C0009F912F /* SecondViewController.swift in Sources */,
+				BA7FCB6D1B580AC0000285BA /* readmore.swift in Sources */,
 				BA859C351B54111800C84F06 /* ShowCourseDetail.swift in Sources */,
 				BA5ED53C1B523F5E0081F53C /* nckucourse.xcdatamodeld in Sources */,
 				BAF8D3E81B4ED3C0009F912F /* AppDelegate.swift in Sources */,
