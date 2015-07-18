@@ -35,6 +35,12 @@
 
 /* Begin PBXFileReference section */
 		BA5679A71B57F37300BD5F16 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		BA5804121B5ABB7600EAC02F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BA5804131B5ABB7700EAC02F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BA5804141B5ABBAE00EAC02F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		BA5804151B5ABBAE00EAC02F /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BA5804181B5ABD1200EAC02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		BA5804191B5ABD1300EAC02F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BA5ED53B1B523F5E0081F53C /* nckucourse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = nckucourse.xcdatamodel; sourceTree = "<group>"; };
 		BA7FCB6C1B580AC0000285BA /* readmore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = readmore.swift; sourceTree = "<group>"; };
 		BA859C341B54111800C84F06 /* ShowCourseDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowCourseDetail.swift; sourceTree = "<group>"; };
@@ -42,13 +48,10 @@
 		BAD6B2101B4EEA47000D1D0D /* AddCourse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCourse.swift; sourceTree = "<group>"; };
 		BAD6B2121B501266000D1D0D /* dep.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dep.json; sourceTree = "<group>"; };
 		BAF8D3E21B4ED3C0009F912F /* nckucourse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nckucourse.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAF8D3E61B4ED3C0009F912F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAF8D3E71B4ED3C0009F912F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAF8D3E91B4ED3C0009F912F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		BAF8D3EB1B4ED3C0009F912F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		BAF8D3EE1B4ED3C0009F912F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BAF8D3F01B4ED3C0009F912F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BAF8D3F31B4ED3C0009F912F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BAF8D3F91B4ED3C0009F912F /* nckucourseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nckucourseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF8D3FE1B4ED3C0009F912F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAF8D3FF1B4ED3C0009F912F /* nckucourseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nckucourseTests.swift; sourceTree = "<group>"; };
@@ -114,7 +117,6 @@
 		BAF8D3E51B4ED3C0009F912F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				BAF8D3E61B4ED3C0009F912F /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -198,7 +200,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = BAF8D3D91B4ED3C0009F912F;
@@ -272,7 +273,9 @@
 		BAF8D3ED1B4ED3C0009F912F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BAF8D3EE1B4ED3C0009F912F /* Base */,
+				BA5804121B5ABB7600EAC02F /* Base */,
+				BA5804141B5ABBAE00EAC02F /* zh-Hant */,
+				BA5804181B5ABD1200EAC02F /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -280,7 +283,9 @@
 		BAF8D3F21B4ED3C0009F912F /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BAF8D3F31B4ED3C0009F912F /* Base */,
+				BA5804131B5ABB7700EAC02F /* Base */,
+				BA5804151B5ABBAE00EAC02F /* zh-Hant */,
+				BA5804191B5ABD1300EAC02F /* en */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -376,7 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = nckucourse/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/nckucourseTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -387,7 +392,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = nckucourse/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/nckucourseTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

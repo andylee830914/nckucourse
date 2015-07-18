@@ -71,7 +71,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 			tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Fade)
 			break
 		case NSFetchedResultsChangeType.Delete:
-			tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Fade)
+			tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: UITableViewRowAnimation.Left)
 			break
 		case NSFetchedResultsChangeType.Move:
 			break
@@ -105,7 +105,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 			tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
 			break
 		case NSFetchedResultsChangeType.Delete:
-			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Left)
 			break
 		case NSFetchedResultsChangeType.Move:
 			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)

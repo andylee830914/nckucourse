@@ -1,0 +1,75 @@
+
+/* Class = "UIBarButtonItem"; title = "新增"; ObjectID = "5Mb-hI-W6M"; */
+"5Mb-hI-W6M.title" = "新增";
+
+/* Class = "UILabel"; text = "問題回報"; ObjectID = "6p4-q9-9Xe"; */
+"6p4-q9-9Xe.text" = "問題回報";
+
+/* Class = "UIButton"; normalTitle = "五"; ObjectID = "6sQ-z9-uj9"; */
+"6sQ-z9-uj9.normalTitle" = "五";
+
+/* Class = "UIButton"; normalTitle = "一"; ObjectID = "7qp-93-4sF"; */
+"7qp-93-4sF.normalTitle" = "一";
+
+/* Class = "UILabel"; text = "成功大學課程查詢"; ObjectID = "7vZ-yS-Exx"; */
+"7vZ-yS-Exx.text" = "成功大學課程查詢";
+
+/* Class = "UIButton"; normalTitle = "六"; ObjectID = "Fim-gO-0Qc"; */
+"Fim-gO-0Qc.normalTitle" = "六";
+
+/* Class = "UINavigationItem"; title = "課程列表"; ObjectID = "GCw-dr-T3U"; */
+"GCw-dr-T3U.title" = "課程列表";
+
+/* Class = "UIButton"; normalTitle = "四"; ObjectID = "L3W-EI-9rd"; */
+"L3W-EI-9rd.normalTitle" = "四";
+
+/* Class = "UINavigationItem"; title = "關於"; ObjectID = "PKJ-P9-rSp"; */
+"PKJ-P9-rSp.title" = "關於";
+
+/* Class = "UITabBarItem"; title = "課程表"; ObjectID = "RSl-zd-EG3"; */
+"RSl-zd-EG3.title" = "課程表";
+
+/* Class = "UILabel"; text = "系所代碼"; ObjectID = "ZqC-Xk-0eR"; */
+"ZqC-Xk-0eR.text" = "系所代碼";
+
+/* Class = "UITabBarItem"; title = "選課表"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "選課表";
+
+/* Class = "UILabel"; text = "成功入口"; ObjectID = "efZ-pb-5Xu"; */
+"efZ-pb-5Xu.text" = "成功入口";
+
+/* Class = "UITableViewSection"; headerTitle = "相關網頁"; ObjectID = "fdR-Cj-hbj"; */
+"fdR-Cj-hbj.headerTitle" = "相關網頁";
+
+/* Class = "UIButton"; normalTitle = "日"; ObjectID = "g2d-0R-Rpa"; */
+"g2d-0R-Rpa.normalTitle" = "日";
+
+/* Class = "UILabel"; text = "資料來源：成大課程查詢系統"; ObjectID = "hrr-Zo-r9E"; */
+"hrr-Zo-r9E.text" = "資料來源：成大課程查詢系統";
+
+/* Class = "UINavigationItem"; title = "新增課程"; ObjectID = "i1g-0G-xKM"; */
+"i1g-0G-xKM.title" = "新增課程";
+
+/* Class = "UINavigationItem"; title = "課程表"; ObjectID = "juT-3l-tOd"; */
+"juT-3l-tOd.title" = "課程表";
+
+/* Class = "UILabel"; text = "成功大學首頁"; ObjectID = "kWx-nn-Q19"; */
+"kWx-nn-Q19.text" = "成功大學首頁";
+
+/* Class = "UILabel"; text = "課程序號"; ObjectID = "pBq-AB-RBK"; */
+"pBq-AB-RBK.text" = "課程序號";
+
+/* Class = "UITableViewSection"; headerTitle = "程式資訊"; ObjectID = "siI-qR-Aim"; */
+"siI-qR-Aim.headerTitle" = "程式資訊";
+
+/* Class = "UIButton"; normalTitle = "三"; ObjectID = "uI5-Dq-5zy"; */
+"uI5-Dq-5zy.normalTitle" = "三";
+
+/* Class = "UIButton"; normalTitle = "二"; ObjectID = "wJa-Q1-QRG"; */
+"wJa-Q1-QRG.normalTitle" = "二";
+
+/* Class = "UINavigationItem"; title = "Title"; ObjectID = "yFN-yN-8c1"; */
+"yFN-yN-8c1.title" = "Title";
+
+/* Class = "UIBarButtonItem"; title = "今天"; ObjectID = "yLG-v8-I01"; */
+"yLG-v8-I01.title" = "今天";

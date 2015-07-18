@@ -83,7 +83,7 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 			var newtime = (data.time as NSString).substringWithRange(match.rangeAtIndex(0))
 			newtime=newtime.stringByReplacingOccurrencesOfString("<BR>", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			if total > 1 {
-				print(counter)
+				//print(counter)
 				if counter > 1{
 					mynewtime = mynewtime+newtime+"\n"
 				}else{
@@ -102,7 +102,7 @@ class dailyCourse: UITableViewController ,NSFetchedResultsControllerDelegate,UIT
 		//print(matches)
 		(cell.contentView.viewWithTag(1) as! UILabel).text = data.name
 		(cell.contentView.viewWithTag(2) as! UILabel).text = mynewtime
-		(cell.contentView.viewWithTag(3) as! UILabel).text = " "+data.place
+		(cell.contentView.viewWithTag(3) as! UILabel).text = data.place+" "
 		//cell.textLabel?.text=mynewtime+" "+data.name
 		//cell.detailTextLabel!.text = " "+data.place
 		

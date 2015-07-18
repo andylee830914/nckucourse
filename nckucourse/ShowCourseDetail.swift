@@ -8,16 +8,17 @@
 
 import UIKit
 
-class ShowCourseDetail: UIViewController {
+class ShowCourseDetail: UIViewController , UIWebViewDelegate {
 	var data: Course?
 	var page: String=""
+	var url : NSURL?
 	@IBOutlet weak var webview: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		//print(data)
 		
-		var url : NSURL?
+		
 		switch page {
 		case "syllabus" :
 			self.title = data!.name
@@ -43,6 +44,11 @@ class ShowCourseDetail: UIViewController {
 			url = NSURL(string: "http://i.ncku.edu.tw")
 			break
 			
+		case "report" :
+			self.title = "問題回報"
+			url = NSURL(string: "https://docs.google.com/forms/d/1BzZjjQ5EjcPH72uMBWf01rePPQnyJXhSbEBAcTm99TA/viewform?usp=send_form")
+			break
+			
 		default :
 			self.title = "國立成功大學"
 			url = NSURL(string: "http://www.ncku.edu.tw")
@@ -51,9 +57,10 @@ class ShowCourseDetail: UIViewController {
 			
 			
 		}
-		
 		let requestObj = NSURLRequest(URL: url!)
+		webview.delegate = self
 		webview.loadRequest(requestObj)
+
         // Do any additional setup after loading the view.
     }
 
@@ -61,8 +68,27 @@ class ShowCourseDetail: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+	func webViewDidStartLoad(webView: UIWebView) {
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+	}
+	
+	func webViewDidFinishLoad(webView: UIWebView) {
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+	}
 
+	@IBAction func share(sender: UIBarButtonItem) {
+		//UIApplication.sharedApplication().openURL(self.url!)
+			
+			if let myWebsite = self.url
+			{
+				let objectsToShare = [myWebsite]
+				let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+				
+				self.presentViewController(activityVC, animated: true, completion: nil)
+			}
+		
+	}
+	
     /*
     // MARK: - Navigation
 

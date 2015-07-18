@@ -157,6 +157,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			htmldata=htmldata as String
+			
 			if let cowMatch = getChinesename.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
 					chinese = (htmldata as NSString).substringWithRange(cowMatch.rangeAtIndex(1))
@@ -180,6 +181,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 				callback("nocourse",[])
 				return
 			}
+			//print(htmldata)
 			var getcclass = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>"+coursesn+"</TD>\\n<TD>([A-Z0-9]{0,2})</TD>", options: nil, error: nil)!
 			if let cowMatch = getcclass.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
@@ -188,7 +190,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
 			}
-			var checkDATA = NSRegularExpression(pattern: "cono="+coursesn+"\">([\\s\\S]+)="+coursesn+"", options: nil, error: nil)!
+			var checkDATA = NSRegularExpression(pattern: "co(?:_{0,1})no="+coursesn+"(?:.*)\">([\\s\\S]+)="+coursesn+"", options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			if let cowMatch = checkDATA.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
@@ -292,15 +294,18 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					}
 					dispatch_async(dispatch_get_main_queue(),{
 						var cour=respond[4] as! String
-						self.finish.text="  新增課程："+cour+" 成功！"
-						self.finish.textAlignment = NSTextAlignment.Center;
+						//self.finish.text="  新增課程："+cour+" 成功！"
+						//self.finish.textAlignment = NSTextAlignment.Center;
+						self.findalert(true,coursename: cour)
 					});
 					return (true,respond[4] as! String)
 				}else{
 					dispatch_async(dispatch_get_main_queue(),{
 						var cour=respond[4] as! String
-						self.finish.text="  新增課程："+cour+" 已存在！"
-						self.finish.textAlignment = NSTextAlignment.Center;
+						//self.finish.text="  新增課程："+cour+" 已存在！"
+						//self.finish.textAlignment = NSTextAlignment.Center;
+						cour = "課程：\(cour) 已存在"
+						self.findalert(false,coursename: cour)
 					});
 					return (false,respond[4] as! String)
 				}
@@ -317,15 +322,19 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 		}else if status=="nocourse"{
 			print(status)
 			dispatch_async(dispatch_get_main_queue(),{
-				self.finish.text="  查無課程！"
-				self.finish.textAlignment = NSTextAlignment.Center;
+				//self.finish.text="  查無課程！"
+				//self.finish.textAlignment = NSTextAlignment.Center;
+				var cour = "查無課程"
+				self.findalert(false,coursename: cour)
 			});
 			return (false,"查無課程！")
 		}else if status=="noconnection"{
 			print(status)
 			dispatch_async(dispatch_get_main_queue(),{
-				self.finish.text="  請檢查網路連線！"
-				self.finish.textAlignment = NSTextAlignment.Center;
+				//self.finish.text="  請檢查網路連線！"
+				//self.finish.textAlignment = NSTextAlignment.Center;
+				var cour = "請檢查網路連線"
+				self.findalert(false,coursename: cour)
 			});
 			return (false,"請檢查網路連線！")
 		}
