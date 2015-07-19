@@ -50,13 +50,13 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 		return fetchedResultsController.sections?.count ?? 0
 	}
 	override func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
-		let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+		//let sectionInfo = fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
 		
 		return fetchedResultsController.sections?[section].numberOfObjects ?? 0
 	}
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		//print("hello2")
-		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
 		let data = fetchedResultsController.objectAtIndexPath(indexPath) as! Course
 		//print(data)
 		cell.textLabel?.text=data.name
@@ -136,7 +136,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == SegueID {
 			//get destination controller
-			var destViewController = segue.destinationViewController as! ShowCourseDetail;
+			let destViewController = segue.destinationViewController as! ShowCourseDetail;
 			let indexPath = self.tableView?.indexPathForCell(sender as! UITableViewCell)
 			let data = fetchedResultsController.objectAtIndexPath(indexPath!) as! Course
 			destViewController.data=data
