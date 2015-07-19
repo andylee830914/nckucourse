@@ -29,6 +29,9 @@
 /* Class = "UITabBarItem"; title = "課程表"; ObjectID = "RSl-zd-EG3"; */
 "RSl-zd-EG3.title" = "課程表";
 
+/* Class = "UILabel"; text = "關於"; ObjectID = "ZMk-yw-QI3"; */
+"ZMk-yw-QI3.text" = "關於";
+
 /* Class = "UILabel"; text = "系所代碼"; ObjectID = "ZqC-Xk-0eR"; */
 "ZqC-Xk-0eR.text" = "系所代碼";
 

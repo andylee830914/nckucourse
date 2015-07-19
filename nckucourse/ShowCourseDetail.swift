@@ -49,6 +49,11 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
 			url = NSURL(string: "https://docs.google.com/forms/d/1BzZjjQ5EjcPH72uMBWf01rePPQnyJXhSbEBAcTm99TA/viewform?usp=send_form")
 			break
 			
+		case "about" :
+			self.title = "關於"
+			url = NSURL(string: "http://andylee830914.github.io/nckucourse/")
+			break
+			
 		default :
 			self.title = "國立成功大學"
 			url = NSURL(string: "http://www.ncku.edu.tw")

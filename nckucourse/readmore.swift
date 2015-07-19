@@ -42,6 +42,9 @@ class readmore: UITableViewController {
 		}else if segue.identifier == "report"{
 			var destViewController = segue.destinationViewController as! ShowCourseDetail;
 			destViewController.page="report"
+		}else if segue.identifier == "about"{
+			var destViewController = segue.destinationViewController as! ShowCourseDetail;
+			destViewController.page="about"
 		}
 		
 	}

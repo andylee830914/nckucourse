@@ -1,3 +1,5 @@
+/* Class = "UILabel"; text = "關於"; ObjectID = "ZMk-yw-QI3"; */
+"ZMk-yw-QI3.text" = "About";
 
 /* Class = "UIBarButtonItem"; title = "新增"; ObjectID = "5Mb-hI-W6M"; */
 "5Mb-hI-W6M.title" = "Add";
@@ -73,3 +75,4 @@
 
 /* Class = "UIBarButtonItem"; title = "今天"; ObjectID = "yLG-v8-I01"; */
 "yLG-v8-I01.title" = "Today";
+
