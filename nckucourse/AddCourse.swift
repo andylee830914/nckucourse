@@ -151,9 +151,10 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			//print(matches)
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" style='text-align: center;'", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			htmldata = htmldata.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+			htmldata = htmldata.stringByReplacingOccurrencesOfString("額滿", withString: "0", options: NSStringCompareOptions.LiteralSearch, range: nil)
 			//print(htmldata)
 			var getChinesename = NSRegularExpression(pattern: "<TD>(.+?)</TD>\\n<TD>"+depno+"</TD>", options: nil, error: nil)!
-			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>([A-Z][A-Z0-9][0-9][0-9][0-9][0-9][0-9])</TD>", options: nil, error: nil)!
+			var checkSN = NSRegularExpression(pattern: "<TD>"+depno+"</TD>\\n<TD>"+courseid+"</TD>\\n<TD>([A-Z][A-Z0-9][0-9][A-Z0-9][0-9][0-9][0-9])</TD>", options: nil, error: nil)!
 			
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			htmldata=htmldata as String
@@ -211,7 +212,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 			matches = depno+","+chinese+","+courseid+","+coursesn+"," + matches
 			matches = matches+","+cclass
 			let matchesArr = matches.componentsSeparatedByString(",")
-			//print(matches)
+			print(matches)
 			callback("Success",matchesArr)
 			return
 		}
