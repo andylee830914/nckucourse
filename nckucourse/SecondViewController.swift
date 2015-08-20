@@ -89,7 +89,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 		switch editingStyle {
 		case .Delete:
 			managedObjectContext?.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! Course)
-			managedObjectContext?.save(nil)
+			managedObjectContext?.save()
 		case .Insert:
 			break
 		case .None:
@@ -102,14 +102,14 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 		
 		switch type {
 		case NSFetchedResultsChangeType.Insert:
-			tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+			tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 			break
 		case NSFetchedResultsChangeType.Delete:
-			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Left)
+			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Left)
 			break
 		case NSFetchedResultsChangeType.Move:
-			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
-			tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as [AnyObject], withRowAnimation: UITableViewRowAnimation.Fade)
+			tableView.deleteRowsAtIndexPaths(NSArray(object: indexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+			tableView.insertRowsAtIndexPaths(NSArray(object: newIndexPath!) as! [NSIndexPath], withRowAnimation: UITableViewRowAnimation.Fade)
 			break
 		case NSFetchedResultsChangeType.Update:
 			tableView.cellForRowAtIndexPath(indexPath!)
