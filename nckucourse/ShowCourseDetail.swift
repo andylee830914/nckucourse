@@ -12,12 +12,17 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
 	var data: Course?
 	var page: String=""
 	var url : NSURL?
+	var externalWindow: UIWindow!
+	var extrenalwebview :UIWebView!
 	@IBOutlet weak var webview: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		//print(data)
-		
+		let screens = UIScreen.screens()
+		if screens.count > 1 {
+			self.initializeExternalScreen(screens[1] as! UIScreen)
+		}
 		
 		switch page {
 		case "syllabus" :
@@ -103,5 +108,37 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+	
+	    // Initialize an external screen
+	    func initializeExternalScreen(externalScreen: UIScreen) {
+	
+	        // Create a new window sized to the external screen's bounds
+	        self.externalWindow = UIWindow(frame: externalScreen.bounds)
+	
+	        // Assign the screen object to the screen property of the new window
+	        self.externalWindow.screen = externalScreen;
+	
+	        // Configure the MapView
+	        var view = UIView(frame: self.externalWindow.frame)
+			let screens = UIScreen.screens()
+			let ext = screens[1] as! UIScreen
+			self.extrenalwebview = UIWebView(frame: CGRectMake(0, 0, ext.bounds.width, ext.bounds.height))
+			self.extrenalwebview.scalesPageToFit = true
+			url = NSURL(string: "http://web.ncku.edu.tw/bin/home.php")
+			let requestObj = NSURLRequest(URL: url!)
+			
+			view.addSubview(self.extrenalwebview!)
+			self.extrenalwebview.delegate = self
+			self.extrenalwebview.loadRequest(requestObj)
+	        self.externalWindow.addSubview(view)
+			
+	        // Make the window visible
+	        self.externalWindow.makeKeyAndVisible()
+	
+	        // Zoom in on the map in the external display
+	    }
+	
+	
+
 
 }

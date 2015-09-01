@@ -15,6 +15,7 @@ class SecondViewController: UITableViewController,NSFetchedResultsControllerDele
 	let managedObjectContext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
 	
 	var fetchedResultsController: NSFetchedResultsController = NSFetchedResultsController()
+	
 
 	override func viewDidLoad() {
 		
