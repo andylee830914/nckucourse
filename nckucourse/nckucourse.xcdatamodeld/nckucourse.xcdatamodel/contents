@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F6a" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Course" representedClassName="nckucourse.Course" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Course" representedClassName="nckucoursetable.Course" syncable="YES">
         <attribute name="cclass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +23,6 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-27" positionY="12" width="128" height="343"/>
+        <element name="Course" positionX="-27" positionY="12" width="128" height="345"/>
     </elements>
 </model>

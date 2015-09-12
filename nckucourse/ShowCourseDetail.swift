@@ -12,17 +12,17 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
 	var data: Course?
 	var page: String=""
 	var url : NSURL?
-	var externalWindow: UIWindow!
-	var extrenalwebview :UIWebView!
+	//var externalWindow: UIWindow!
+	//var extrenalwebview :UIWebView!
 	@IBOutlet weak var webview: UIWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		//print(data)
-		let screens = UIScreen.screens()
-		if screens.count > 1 {
-			self.initializeExternalScreen(screens[1] as! UIScreen)
-		}
+		//let screens = UIScreen.screens()
+		//if screens.count > 1 {
+		//	self.initializeExternalScreen(screens[1] as! UIScreen)
+		//}
 		
 		switch page {
 		case "syllabus" :
@@ -108,6 +108,7 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+	/*
 	
 	    // Initialize an external screen
 	    func initializeExternalScreen(externalScreen: UIScreen) {
@@ -138,7 +139,7 @@ class ShowCourseDetail: UIViewController , UIWebViewDelegate {
 	        // Zoom in on the map in the external display
 	    }
 	
-	
+	*/
 
 
 }
