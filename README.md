@@ -10,7 +10,7 @@
 * 2015-07-09 Start the Project
 * 2015-07-19 完成第一版
 * 2015-07-27 公開於 Github repo
-* 2015-09-15 v1.0上架
+* 2015-09-15 v1.0上架 [iTunes link](https://itunes.apple.com/us/app/xing-dong-ke-biao/id1037708226?mt=8)
 
 
 ##作者##
