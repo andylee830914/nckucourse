@@ -191,7 +191,7 @@ class AddCourse: UIViewController, UIPickerViewDelegate, UITextFieldDelegate {
 					//var match=cowMatch as NSTextCheckingResult
 					// prints "cow"
 			}
-			var checkDATA = NSRegularExpression(pattern: "co(?:_{0,1})no="+coursesn+"(?:.*)\">([\\s\\S]+)="+coursesn+"", options: nil, error: nil)!
+			var checkDATA = NSRegularExpression(pattern: "co(?:_{0,1})no="+coursesn+"(?:.*)\">([\\s\\S]+)="+coursesn+"&class_code="+cclass, options: nil, error: nil)!
 			//<TD style='text-align: center;' >"+courseid+"</TD><TD style='text-align: center;' >"+depno+"([0-9][0-9][0-9][0-9][0-9])</TD>
 			if let cowMatch = checkDATA.firstMatchInString(htmldata, options: nil,
 				range: NSRange(location: 0, length: count(htmldata))){
